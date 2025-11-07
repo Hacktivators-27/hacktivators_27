@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Intelligence Correlation Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Threat Intelligence Correlation Engine</h1>
+            <p>Real-time IP Reputation & Threat Attribution</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="ipInput" placeholder="Enter IP Address (e.g., 8.8.8.8)" />
+                <button onclick="analyzeIP()">Analyze Threat</button>
+            </div>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Querying multiple threat intelligence sources...</p>
+        </div>
+
+        <div id="results" class="results hidden">
+            <!-- Threat Attribution Summary -->
+            <div class="attribution-header">
+                <h2>🎯 Threat Attribution Report</h2>
+                <div id="verdict" class="verdict"></div>
+            </div>
+
+            <!-- Risk Overview -->
+            <div class="risk-overview">
+                <div class="risk-card">
+                    <h2>Risk Level</h2>
+                    <div id="riskLevel" class="risk-badge">-</div>
+                </div>
+                <div class="risk-card">
+                    <h2>Threat Score</h2>
+                    <div id="threatScore" class="score">-</div>
+                </div>
+                <div class="risk-card">
+                    <h2>Location</h2>
+                    <div id="country" class="info">-</div>
+                </div>
+            </div>
+
+            <!-- NEW: Geolocation & ASN Section -->
+            <div class="geolocation-section">
+                <h3>🌍 Geolocation & Network Information</h3>
+                <div class="geo-grid">
+                    <div class="geo-card geo-primary">
+                        <div class="geo-icon">📍</div>
+                        <div class="geo-label">IP Address</div>
+                        <div id="geoIP" class="geo-value">-</div>
+                    </div>
+                    
+                    <div class="geo-card geo-primary">
+                        <div class="geo-icon">🌐</div>
+                        <div class="geo-label">Country</div>
+                        <div id="geoCountry" class="geo-value">-</div>
+                    </div>
+                    
+                    <div class="geo-card geo-primary">
+                        <div class="geo-icon">🏙️</div>
+                        <div class="geo-label">City</div>
+                        <div id="geoCity" class="geo-value">-</div>
+                    </div>
+                    
+                    <div class="geo-card geo-highlight">
+                        <div class="geo-icon">🔢</div>
+                        <div class="geo-label">ASN (Autonomous System)</div>
+                        <div id="geoASN" class="geo-value geo-asn">-</div>
+                    </div>
+                    
+                    <div class="geo-card">
+                        <div class="geo-icon">🏢</div>
+                        <div class="geo-label">ISP / Provider</div>
+                        <div id="geoISP" class="geo-value">-</div>
+                    </div>
+                    
+                    <div class="geo-card">
+                        <div class="geo-icon">🏛️</div>
+                        <div class="geo-label">Organization</div>
+                        <div id="geoOrg" class="geo-value">-</div>
+                    </div>
+                    
+                    <div class="geo-card">
+                        <div class="geo-icon">🕐</div>
+                        <div class="geo-label">Timezone</div>
+                        <div id="geoTimezone" class="geo-value">-</div>
+                    </div>
+                    
+                    <div class="geo-card">
+                        <div class="geo-icon">📐</div>
+                        <div class="geo-label">Coordinates</div>
+                        <div id="geoCoords" class="geo-value">-</div>
+                    </div>
+                </div>
+                
+                <!-- Map placeholder -->
+                <div class="map-container">
+                    <div id="mapPlaceholder" class="map-placeholder">
+                        <div class="map-icon">🗺️</div>
+                        <div class="map-text">Geographic Location</div>
+                        <div id="mapInfo" class="map-info">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Threat Categories Section -->
+            <div class="threat-categories-section">
+                <h3>🔍 Threat Category Analysis</h3>
+                <div id="threatCategories" class="category-grid">
+                    <!-- Categories will be dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Detailed Sections -->
+            <div class="details-section">
+                <div class="detail-card">
+                    <h3>📊 Intelligence Sources</h3>
+                    <div id="sources" class="source-list"></div>
+                </div>
+
+                <div class="detail-card">
+                    <h3>⚠️ Detected Threats</h3>
+                    <div id="threats" class="threat-list"></div>
+                </div>
+
+                <div class="detail-card">
+                    <h3>🔍 Network Details</h3>
+                    <div id="ipInfo" class="ip-info"></div>
+                </div>
+
+                <div class="detail-card">
+                    <h3>📈 Activity Timeline</h3>
+                    <div id="timeline" class="timeline"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="error" class="error hidden"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
